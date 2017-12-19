@@ -53,6 +53,7 @@
             this.btnAddProduct.TabIndex = 0;
             this.btnAddProduct.Text = "&Add Product...";
             this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // btnDeleteProduct
             // 
@@ -62,6 +63,7 @@
             this.btnDeleteProduct.TabIndex = 1;
             this.btnDeleteProduct.Text = "&Delete Product...";
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
+            this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
             // btnExit
             // 
@@ -71,6 +73,7 @@
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label1
             // 
@@ -108,6 +111,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Maintenance";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

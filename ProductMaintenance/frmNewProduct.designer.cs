@@ -66,7 +66,6 @@
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "&Price:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtCode
             // 
@@ -74,6 +73,7 @@
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(100, 22);
             this.txtCode.TabIndex = 1;
+            this.txtCode.Tag = "Code";
             // 
             // txtDescription
             // 
@@ -81,6 +81,7 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(283, 22);
             this.txtDescription.TabIndex = 3;
+            this.txtDescription.Tag = "Description";
             // 
             // txtPrice
             // 
@@ -88,6 +89,7 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(100, 22);
             this.txtPrice.TabIndex = 5;
+            this.txtPrice.Tag = "Price";
             // 
             // btnSave
             // 
@@ -97,6 +99,7 @@
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -106,6 +109,7 @@
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label4
             // 
