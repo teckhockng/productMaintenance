@@ -47,7 +47,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Code:";
+            this.label1.Text = "C&ode:";
             // 
             // label2
             // 
@@ -55,8 +55,8 @@
             this.label2.Location = new System.Drawing.Point(92, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Description: ";
+            this.label2.TabIndex = 2;
+            this.label2.Text = "&Description: ";
             // 
             // label3
             // 
@@ -64,8 +64,8 @@
             this.label3.Location = new System.Drawing.Point(135, 191);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Price:";
+            this.label3.TabIndex = 4;
+            this.label3.Text = "&Price:";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtCode
@@ -73,14 +73,14 @@
             this.txtCode.Location = new System.Drawing.Point(208, 81);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(100, 22);
-            this.txtCode.TabIndex = 3;
+            this.txtCode.TabIndex = 1;
             // 
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(208, 131);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(283, 22);
-            this.txtDescription.TabIndex = 4;
+            this.txtDescription.TabIndex = 3;
             // 
             // txtPrice
             // 
@@ -114,7 +114,7 @@
             this.label4.Location = new System.Drawing.Point(213, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 29);
-            this.label4.TabIndex = 8;
+            this.label4.TabIndex = 9;
             this.label4.Text = "Add Product";
             // 
             // label5
@@ -124,7 +124,7 @@
             this.label5.Location = new System.Drawing.Point(474, 286);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 17);
-            this.label5.TabIndex = 9;
+            this.label5.TabIndex = 8;
             this.label5.Text = "Anju Chawla";
             // 
             // frmNewProduct

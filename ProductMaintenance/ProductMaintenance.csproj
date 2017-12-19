@@ -57,6 +57,7 @@
     <Compile Include="frmNewProduct.designer.cs">
       <DependentUpon>frmNewProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs" />
     <Compile Include="ProductDB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
