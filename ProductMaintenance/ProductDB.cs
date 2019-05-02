@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace ProductMaintenance
 {
@@ -12,80 +11,53 @@ namespace ProductMaintenance
 
         public static List<Product> GetProducts()
         {
+            // if the directory doesn't exist, create it
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            // create the object for the input stream for a text file
+            StreamReader textIn =
+                new StreamReader(
+                new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read));
+
+            // create the list
             List<Product> products = new List<Product>();
-            Product product;
-            StreamReader textIn = null ;
 
-            try
+            // read the data from the file and store it in the list
+            while (textIn.Peek() != -1)
             {
-                // if the directory doesn't exist, create it
-                if (!Directory.Exists(dir))
-                    Directory.CreateDirectory(dir);
-
-                // create the object for the input stream for a text file
-                textIn =
-                   new StreamReader(
-                   new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read));
-
-
-
-                // read the data from the file and store it in the list
-                while (textIn.Peek() != -1)
-                {
-                    string row = textIn.ReadLine();
-                    string[] columns = row.Split('|');
-                    product = new Product();
-                    product.Code = columns[0];
-                    product.Description = columns[1];
-                    product.Price = Convert.ToDecimal(columns[2]);
-                    products.Add(product);
-                }
-                return products;
+                string row = textIn.ReadLine();
+                string[] columns = row.Split('|');
+                Product product = new Product();
+                product.Code = columns[0];
+                product.Description = columns[1];
+                product.Price = Convert.ToDecimal(columns[2]);
+                products.Add(product);
             }
-            
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message, "Input/Output Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            finally {
-                // close the input stream for the text file
-                if(textIn != null)
-                    textIn.Close();
-            }
+
+            // close the input stream for the text file
+            textIn.Close();
 
             return products;
         }
 
         public static void SaveProducts(List<Product> products)
         {
-
-            StreamWriter textOut = null;
             // create the output stream for a text file that exists
-            try
-            {
-                textOut =
-                    new StreamWriter(
-                    new FileStream(path, FileMode.Create, FileAccess.Write));
+            StreamWriter textOut =
+                new StreamWriter(
+                new FileStream(path, FileMode.Create, FileAccess.Write));
 
-                // write each product
-                foreach (Product product in products)
-                {
-                    textOut.Write(product.Code + "|");
-                    textOut.Write(product.Description + "|");
-                    textOut.WriteLine(product.Price);
-                }
-            }
-            catch(IOException ex)
+            // write each product
+            foreach (Product product in products)
             {
-                MessageBox.Show(ex.Message, "Input/Output Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                textOut.Write(product.Code + "|");
+                textOut.Write(product.Description + "|");
+                textOut.WriteLine(product.Price);
             }
-            finally
-            {
-                if(textOut != null)
-                    textOut.Close();
-            }
+
             // close the output stream for the text file
-            
+            textOut.Close();
         }
     }
 }

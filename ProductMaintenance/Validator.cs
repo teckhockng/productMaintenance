@@ -7,71 +7,58 @@ using System.Windows.Forms;
 
 namespace ProductMaintenance
 {
-    public static class Validator
+    public class Validator
     {
-        private static string title ;  //can remove this definition since has a self bodied property
-        public static string Title { get; set; }
+        private static string title;
 
-        public static bool IsPresent(TextBox textBox)
+        public static string Title { get; set;}
+
+        //method to check if the input is provided
+        public static bool isPresent(TextBox textBox)
         {
-            Title = " Entry Error";
-            Title = textBox.Tag + Title;
-
-            if(textBox.Text == String.Empty)
-                {
-                MessageBox.Show(textBox.Tag + " is a required field...cannot be left blank.", Title,
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (textBox.Text == String.Empty)
+            {
+                Title = " Entry Error";
+                Title = textBox.Tag + Title;
+                MessageBox.Show(textBox.Tag + " is a required field...cannot be blank", Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox.Focus();
                 return false;
-
             }
             return true;
-
-
         }
 
-        public static bool IsDecimal(TextBox textBox)
+        //this method checks if the input is a decimal number
+        public static bool isDecimal(TextBox textBox)
         {
-            decimal number = 0;
+            decimal number = 0m;
 
-            Title = " Non Numeric Error";
-            Title = textBox.Tag + Title;
-
-            if(Decimal.TryParse(textBox.Text, out number))
-            {
+            if (Decimal.TryParse(textBox.Text, out number))
                 return true;
+            else
+            {
+                Title = " Entry Error";
+                Title = textBox.Tag + Title;
+                MessageBox.Show(textBox.Tag + " must be a decimal value", Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox.Select();
+                textBox.Focus();
+                return false;
             }
-
-            MessageBox.Show(textBox.Tag + " must be a decimal value.", Title,
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            textBox.SelectAll();
-            textBox.Focus();
-            return false;
-
         }
 
+        //check if price is within range
         public static bool IsWithinRange(TextBox textBox, decimal min, decimal max)
         {
-            Title = " Out Of Range Error";
-            Title = textBox.Tag + Title;
-
             decimal number = Convert.ToDecimal(textBox.Text);
 
-            if (number > min && number <= max)
+            if (number >= min && number <= max)
                 return true;
 
-            MessageBox.Show(textBox.Tag + " must be a decimal value > " + min + " and <= " + max, Title,
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Title = " Entry Error";
+            Title = textBox.Tag + Title;
+            MessageBox.Show(textBox.Tag + " must be between" + min + "and" + max, Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
             textBox.SelectAll();
             textBox.Focus();
             return false;
-
         }
-
-
-
-
-
-
     }
 }

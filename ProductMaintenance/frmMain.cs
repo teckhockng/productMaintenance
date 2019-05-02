@@ -12,77 +12,79 @@ namespace ProductMaintenance
 {
     public partial class frmMain : Form
     {
-
-        private List<Product> products = null;
+        private ProductList products;
 
         public frmMain()
         {
+
+            products = new ProductList();
             InitializeComponent();
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            frmNewProduct newProductForm = new frmNewProduct();
-            newProductForm.ShowDialog();
-            Product product = newProductForm.GetNewProduct();
-            if(product != null)
-                {
-                products.Add(product);
-                ProductDB.SaveProducts(products);
-                FillProductListBox();
-
-                
-            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            products = ProductDB.GetProducts();
+            products.Changed += new ProductList.ChangeHandler(HandleChange);
+            products.Fill();
             FillProductListBox();
+        }
 
+        private void HandleChange(ProductList products)
+        {
+            products.Save();
+            FillProductListBox();
         }
 
         private void FillProductListBox()
         {
+            Product p;
+
             lstProducts.Items.Clear();
-            foreach (Product product in products)
+            for(int i = 0; i < products.Count; i++)
             {
-                lstProducts.Items.Add(product.GetDisplayText("\t"));
+                p = products[i];
+                lstProducts.Items.Add(p.GetDisplay("\t"));
             }
-            
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
-            int i = lstProducts.SelectedIndex;
+            int selectedIndex = lstProducts.SelectedIndex;
+            Product p;
+            bool flag = false;
 
-            if(i != -1)
+            if(selectedIndex != -1)
             {
-                DialogResult confirm = MessageBox.Show("Sure you want to delete this product?",
-                    "Confirm DDelete", MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-               Product product = products[i];
-                if(confirm == DialogResult.Yes)
+                DialogResult confirm = MessageBox.Show("Do you want this selected product?", "Confirm Delete", 
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                if (confirm == DialogResult.Yes)
                 {
-                   // products.RemoveAt(i);
-                    products.Remove(product);
-                    ProductDB.SaveProducts(products);
-                    FillProductListBox();
+                    p = products[selectedIndex];
+                    // products.Remove(p);
+                    flag = products - p; // overloaded operator -
+                    if (flag)
+                        MessageBox.Show("Product deleted");
+                    else
+                        MessageBox.Show("Product is not deleted");
+                    
                 }
-
             }
-            else
-            {
-                MessageBox.Show("Please select the product to be deleted",
-                    "Unsuccessful Delete", MessageBoxButtons.OK, 
-                    MessageBoxIcon.Information);
-            }
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            frmNewProduct newProduct = new frmNewProduct();
+            newProduct.ShowDialog();
+            Product p = newProduct.GetNewProduct();
+
+            if(p != null)
+            {
+                products += p;
+            }
         }
     }
 }
